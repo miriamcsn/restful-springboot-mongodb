@@ -57,4 +57,11 @@ public class UserResource {
         //noContent é o código 204
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody UserDTO objDTO) {
+        User obj = userService.instancingNewUserFromDTO(objDTO);
+        obj.setId(id);
+        obj = userService.update(obj);
+        return ResponseEntity.noContent().build();
+    }
 }
