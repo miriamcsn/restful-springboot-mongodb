@@ -1,5 +1,6 @@
 package com.myfactory.restfulspringbootmongodb.resources;
 
+import com.myfactory.restfulspringbootmongodb.domain.Post;
 import com.myfactory.restfulspringbootmongodb.domain.User;
 import com.myfactory.restfulspringbootmongodb.dto.UserDTO;
 import com.myfactory.restfulspringbootmongodb.services.UserService;
@@ -64,4 +65,13 @@ public class UserResource {
         obj = userService.update(obj);
         return ResponseEntity.noContent().build();
     }
+
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = userService.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
+
+
 }
