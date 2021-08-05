@@ -5,11 +5,10 @@ import com.myfactory.restfulspringbootmongodb.dto.UserDTO;
 import com.myfactory.restfulspringbootmongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +34,19 @@ public class UserResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> findById (@PathVariable String id) {
+    public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         User obj = userService.findById(id);
         return ResponseEntity.ok().body(new UserDTO(obj));
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> insert(@RequestBody UserDTO objDTO) {
+        User obj = userService.instancingNewUserFromDTO(objDTO);
+        obj = userService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        // essa linha acima vai pegar o endereço do novo objeto q eu inseri
+        return ResponseEntity.created(uri).build();
+        // created retorna o código 201 q é o código que sinaliza que o recurso foi inserido com sucesso
+        // retorna um corpo de resposta vazio com o header contendo o endereço do novo recurso criado.
     }
 }
