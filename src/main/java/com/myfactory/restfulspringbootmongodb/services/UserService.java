@@ -29,6 +29,11 @@ public class UserService {
         return userRepository.insert(obj);
     }
 
+    public void delete(String id) {
+        findById(id); //se nao encontrar, ele cai na excecao que estabelecemos acima no findbyid
+        userRepository.deleteById(id);
+    }
+
     public User instancingNewUserFromDTO(UserDTO objDTO) {
         return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
     }

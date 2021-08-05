@@ -49,4 +49,12 @@ public class UserResource {
         // created retorna o código 201 q é o código que sinaliza que o recurso foi inserido com sucesso
         // retorna um corpo de resposta vazio com o header contendo o endereço do novo recurso criado.
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+        //noContent é o código 204
+    }
+
 }
