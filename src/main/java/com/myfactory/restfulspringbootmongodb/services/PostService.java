@@ -1,10 +1,7 @@
 package com.myfactory.restfulspringbootmongodb.services;
 
 import com.myfactory.restfulspringbootmongodb.domain.Post;
-import com.myfactory.restfulspringbootmongodb.domain.User;
-import com.myfactory.restfulspringbootmongodb.dto.UserDTO;
 import com.myfactory.restfulspringbootmongodb.repositories.PostRepository;
-import com.myfactory.restfulspringbootmongodb.repositories.UserRepository;
 import com.myfactory.restfulspringbootmongodb.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +18,9 @@ public class PostService {
     public Post findById(String id) {
         Optional<Post> obj = postRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found. "));
+    }
+
+    public List<Post> findByTitleContaining(String text) {
+        return postRepository.findByTitleContainingIgnoreCase(text);
     }
 }
