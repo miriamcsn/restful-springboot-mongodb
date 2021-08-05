@@ -6,6 +6,7 @@ import com.myfactory.restfulspringbootmongodb.services.exceptions.ObjectNotFound
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,4 +26,9 @@ public class PostService {
         // a linha de cima funciona normalmente - para funcionar, descomentar e comentar essa de baixo
         return postRepository.searchTitle(text);
     }
+
+//    public List<Post> findPostsByTextAndDate(String text, LocalDate min, LocalDate max) {
+////        max = max.plusDays(1);
+//        return postRepository.findPostsByTextAndDate(text, min, max);
+//    }
 }
