@@ -1,11 +1,17 @@
 package com.myfactory.restfulspringbootmongodb.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document
 public class User implements Serializable {
 
-    private String id, name, email;
+    @Id
+    private String id;
+    private String name, email;
 
     public User() {
     }
