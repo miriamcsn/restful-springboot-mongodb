@@ -2,6 +2,7 @@ package com.myfactory.restfulspringbootmongodb.config;
 
 import com.myfactory.restfulspringbootmongodb.domain.Post;
 import com.myfactory.restfulspringbootmongodb.domain.User;
+import com.myfactory.restfulspringbootmongodb.dto.AuthorDTO;
 import com.myfactory.restfulspringbootmongodb.repositories.PostRepository;
 import com.myfactory.restfulspringbootmongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,13 @@ public class Instantiation implements CommandLineRunner {
                 null,
                 "Partiu viagem!",
                 "Vou viajar para SP, abraços",
-                LocalDate.parse("21/03/2018", formatter), maria);
+                LocalDate.parse("21/03/2018", formatter), new AuthorDTO(maria));
 
         Post post2 = new Post(
                 null,
                 "Bom dia!",
                 "Acordei feliz hoje",
-                LocalDate.parse("23/03/2018", formatter), maria);
+                LocalDate.parse("23/03/2018", formatter), new AuthorDTO(maria));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
